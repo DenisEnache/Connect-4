@@ -1,0 +1,32 @@
+#game-board {
+    border-collapse: collapse;
+}
+
+#game-board td {
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    font-size: 24px;
+    border: 1px solid #000;
+}
+
+.card-text {
+    font-size: 25px;
+}
+
+.game-status {
+    font-size: 40px;
+    color: black;
+}
+
+.red-token {
+    background-image: url('https://images.emojiterra.com/google/noto-emoji/unicode-15/color/512px/1f534.png'); 
+    background-size: cover; 
+    border-radius: 50%; 
+}
+
+.yellow-token {
+    background-image: url('https://images.emojiterra.com/google/android-12l/512px/1f7e1.png'); 
+    background-size: cover;
+    border-radius: 50%;
+}
