@@ -1,19 +1,11 @@
-const playerMoveFirst = Math.floor(Math.random() * 2);
-const gameStatusPlayer1 = document.getElementById("gameStatusPlayer1");
-const gameStatusPlayer2 = document.getElementById("gameStatusPlayer2");
+const gameFinalStatus = [document.getElementById("gameStatusPlayer1"), document.getElementById("gameStatusPlayer2")];
 const table = document.querySelector('table');
-let currentPlayer;
-
-function randomPlayerStart() {
-    currentPlayer = playerMoveFirst + 1;
-}
-
-randomPlayerStart();
+let currentPlayer = Math.floor(Math.random() * 2) + 1;
 
 function makeMove(col) {
     for (let i = table.rows.length - 1; i >= 0; --i) {
         let cell = table.rows[i].cells[col];
-        if (cell && cell.innerHTML == '' && gameStatusPlayer1.textContent == '' && gameStatusPlayer2.textContent == '') {
+        if (cell && cell.innerHTML == '' && gameFinalStatus[currentPlayer % 2].innerHTML == '') {
             if (currentPlayer == 1) {
                 cell.classList.add('red-token');
                 cell.innerHTML = ' ';
@@ -26,15 +18,17 @@ function makeMove(col) {
             break;
         }
     }
-    gameStatusPlayer1.classList.add('game-status');
-    gameStatusPlayer2.classList.add('game-status');
-    if (checkBoard() && currentPlayer == 2) {
-        gameStatusPlayer1.textContent = "Winner!";
-    } else if (checkBoard() && currentPlayer == 1) {
-        gameStatusPlayer2.textContent = "Winner!";
+    gameStatus();
+}
+
+function gameStatus() {
+    gameFinalStatus[0].classList.add('game-status');
+    gameFinalStatus[1].classList.add('game-status');
+    if (checkBoard()) {
+        gameFinalStatus[currentPlayer % 2].textContent = "Winner!";
     } else if (checkDraw()) {
-        gameStatusPlayer1.textContent = "Draw";
-        gameStatusPlayer2.textContent = "Draw";
+        gameFinalStatus[0].textContent = "Draw";
+        gameFinalStatus[1].textContent = "Draw";
     }
 }
 
@@ -100,6 +94,7 @@ function restart() {
             cell.classList.remove('red-token', 'yellow-token');
         }
     }
-    gameStatusPlayer1.textContent = '';
-    gameStatusPlayer2.textContent = '';
+    currentPlayer = Math.floor(Math.random() * 2) + 1;
+    gameFinalStatus[0].textContent = '';
+    gameFinalStatus[1].textContent = '';
 }
